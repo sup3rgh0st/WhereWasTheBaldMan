@@ -8,6 +8,6 @@
   Run the python script with Python 3 in its own folder with a copy of FFMPEG.exe next to it. Change "channel_name =" to point to the Twitch streamer of choice. 
 
 ## Dependencies:
-  Use pip install <x> For everything: cv2, twitchdl, youtube_dl, PIL pytesseract* (Requires some setup, follow the instructions on https://pypi.org/)
+  Use 'pip install' for everything; it runs on python magic: cv2, twitchdl, youtube_dl, PIL, pytesseract* (Requires some setup, follow the instructions on https://pypi.org/)
  
 cheer100 Happy Birthday! 🙌🙌🙌🙌🙌🙌🙌🙌🙌 RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
