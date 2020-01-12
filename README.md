@@ -9,5 +9,16 @@
 
 ## Dependencies:
   Use 'pip install' for everything; it runs on python magic: cv2, twitchdl, youtube_dl, PIL, pytesseract* (Requires some setup, follow the instructions on https://pypi.org/)
- 
-cheer100 Happy Birthday! 🙌🙌🙌🙌🙌🙌🙌🙌🙌 RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+
+## FAQ
+  Why is the code a monolithic nightmare?
+  
+  Why did you make this?
+  
+  Did you write this by just stiching copy-pasted stuff you found online?
+  
+  Do you even know how to write clean Python code?
+  
+  Why didn't you answer any of these questions?
+  
+  cheer100 Happy Birthday! 🙌🙌🙌🙌🙌🙌🙌🙌🙌 RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
