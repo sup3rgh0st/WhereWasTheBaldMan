@@ -6,6 +6,7 @@ import subprocess
 import pytesseract
 import re
 import time
+import sqlite3
 
 from PIL import ImageFilter, ImageEnhance
 from PIL import Image
@@ -38,7 +39,8 @@ vod_id = videos['videos'][0]["_id"][1:]
 vod_url = videos['videos'][0]["url"]
 
 #test url
-#vod_url = "https://www.twitch.tv/aurateur/clip/ExpensiveCrunchyBananaBleedPurple"
+#vod_id = "532684964"
+#vod_url = "https://www.twitch.tv/videos/532684964"
 
 print("  VOD ID: " + vod_id)
 print("  VOD URL: " + vod_url)
@@ -87,12 +89,13 @@ print("VOD Resolution: " + str(video_width) + " x " + str(video_height))
 framecount = 0
 level_code_list = {}
 while(video.isOpened()):
-    #for x in range(0, (int(video_fps) * 2)):
-    #    ret, frame = video.read()
     video.set(cv2.CAP_PROP_POS_FRAMES, framecount)
     ret, frame = video.read()
     framecount += (int(video_fps) * 2)
-        
+    
+    if(framecount % (int(video_fps) * 100) == 0):
+        print("Progress: "+ str(int((framecount/video_framecount)* 100) ) + "%")
+    
     if ret == True:
         print(".", end = '', flush=True)
         pil_frame = Image.fromarray(frame)
@@ -107,16 +110,28 @@ while(video.isOpened()):
             level_code = level_code.group(0)
             print(level_code)
             if level_code not in level_code_list:
-                level_code_list[level_code] = time.strftime('%H:%M:%S', time.gmtime(int(framecount / 60)))
+                level_code_list[level_code] = framecount
     else:
         break
 
 video.release()
 
 print("\nFound " + str(len(level_code_list)) + " Levels Played!")
+
+# Open a Connection to the ID Database
+conn = sqlite3.connect('ids.db')
+cur = conn.cursor()
+
 for id in level_code_list:
-    output_file.write(id + " @ " + level_code_list[id])
-    print(id + " @ " + level_code_list[id])
+    output_file.write(id + " @ " + str(level_code_list[id]) + "\n")
+    print(id + " @ " + str(level_code_list[id]))
+    
+    # Write the Level ID to the ID Database
+    db_ins = (id,vod_id,level_code_list[id])
+    cur.execute("INSERT INTO IDS (LevelId, VodId, FrameNumber) VALUES(?,?,?)", db_ins)
+
+conn.commit()
+conn.close()
 
 output_file.close()
 
